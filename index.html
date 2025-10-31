@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>LinkedIn Feeling Lucky</title>
+  <title>Ducky Feeling Lucky</title>
   <style>
     body {
       font-family: Arial;
@@ -18,20 +18,22 @@
   </style>
 </head>
 <body>
-  <h1>LinkedIn Feeling Lucky 🍀</h1>
-  <input type="text" id="query" placeholder="Type name or keyword..." required>
-  <button id="goBtn">Go</button>
+  <h1>Ducky Feeling Lucky 🍀</h1>
+  <form id="duckyForm" action="https://duckduckgo.com/" method="get">
+    <input type="text" name="q" placeholder="Type your query..." required>
+    <button type="submit">Go</button>
+  </form>
 
   <script>
-    document.getElementById('goBtn').addEventListener('click', function(){
-      const q = document.getElementById('query').value.trim();
-      if(!q) return;
-
-      // DuckDuckGo search URL with LinkedIn bang
-      const url = `https://duckduckgo.com/lite/?q=!li+${encodeURIComponent(q)}`;
-
-      // Open the search page in a new tab to parse results
-      window.open(url, '_blank');
+    const form = document.getElementById('duckyForm');
+    form.addEventListener('submit', function(e){
+      const input = form.querySelector('input[name="q"]').value.trim();
+      if(input){
+        // Prepend !ducky to query
+        form.q.value = `!ducky ${input}`;
+      } else {
+        e.preventDefault(); // prevent empty submission
+      }
     });
   </script>
 </body>
